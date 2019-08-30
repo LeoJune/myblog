@@ -1,0 +1,769 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myblog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/myblog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="前端、博客">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myblog/images/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="1.CSS和JS在网页中的放置顺序css的使用通过&amp;lt;link&amp;gt;标签引入样式表，放置在&amp;lt;head&amp;gt;标签里，防止渲染时出现白屏。js的使用通过&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;标签引入js文件，放置在&amp;lt;/body&amp;gt;之前，防止阻塞&amp;lt;script&amp;gt;后面内容的渲染。 2.白屏和FOUC白屏：对于IE及Chrome等浏览器，需将html内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css,fouc,async和defer,网页渲染机制等">
+<meta property="og:url" content="http://yoursite.com/myblog/2018/04/21/css-fouc-async和defer-网页渲染机制等/index.html">
+<meta property="og:site_name" content="今天风儿有些喧嚣">
+<meta property="og:description" content="1.CSS和JS在网页中的放置顺序css的使用通过&amp;lt;link&amp;gt;标签引入样式表，放置在&amp;lt;head&amp;gt;标签里，防止渲染时出现白屏。js的使用通过&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;标签引入js文件，放置在&amp;lt;/body&amp;gt;之前，防止阻塞&amp;lt;script&amp;gt;后面内容的渲染。 2.白屏和FOUC白屏：对于IE及Chrome等浏览器，需将html内">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/myblog/2018/04/21/css-fouc-async和defer-网页渲染机制等/xuanranliucheng.png">
+<meta property="og:image" content="http://yoursite.com/myblog/2018/04/21/css-fouc-async和defer-网页渲染机制等/chrome.png">
+<meta property="og:image" content="http://yoursite.com/myblog/2018/04/21/css-fouc-async和defer-网页渲染机制等/firefox.jpg">
+<meta property="og:updated_time" content="2018-04-21T09:34:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css,fouc,async和defer,网页渲染机制等">
+<meta name="twitter:description" content="1.CSS和JS在网页中的放置顺序css的使用通过&amp;lt;link&amp;gt;标签引入样式表，放置在&amp;lt;head&amp;gt;标签里，防止渲染时出现白屏。js的使用通过&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;标签引入js文件，放置在&amp;lt;/body&amp;gt;之前，防止阻塞&amp;lt;script&amp;gt;后面内容的渲染。 2.白屏和FOUC白屏：对于IE及Chrome等浏览器，需将html内">
+<meta name="twitter:image" content="http://yoursite.com/myblog/2018/04/21/css-fouc-async和defer-网页渲染机制等/xuanranliucheng.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/myblog/2018/04/21/css-fouc-async和defer-网页渲染机制等/">
+
+
+
+
+
+  <title> css,fouc,async和defer,网页渲染机制等 | 今天风儿有些喧嚣 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">今天风儿有些喧嚣</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myblog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myblog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myblog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/myblog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/myblog/myblog/2018/04/21/css-fouc-async和defer-网页渲染机制等/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leojune">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/myblog/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="今天风儿有些喧嚣">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                css,fouc,async和defer,网页渲染机制等
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T17:23:33+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myblog/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-CSS和JS在网页中的放置顺序"><a href="#1-CSS和JS在网页中的放置顺序" class="headerlink" title="1.CSS和JS在网页中的放置顺序"></a>1.CSS和JS在网页中的放置顺序</h1><p>css的使用通过<code>&lt;link&gt;</code>标签引入样式表，放置在<code>&lt;head&gt;</code>标签里，防止渲染时出现白屏。<br>js的使用通过<code>&lt;script&gt;&lt;/script&gt;</code>标签引入js文件，放置在<code>&lt;/body&gt;</code>之前，防止阻塞<code>&lt;script&gt;</code>后面内容的渲染。</p>
+<h1 id="2-白屏和FOUC"><a href="#2-白屏和FOUC" class="headerlink" title="2.白屏和FOUC"></a>2.白屏和FOUC</h1><p>白屏：对于IE及Chrome等浏览器，需将html内容及引入的CSS内容都加载完成后，浏览器才会对页面代码进行渲染呈现到用户面前，此时如果html内容很多，浏览器处理请求、加载需要较长时间，会出现浏览器一段时间内无内容呈现给用户，就是典型的白屏效果。</p>
+<p>FOUC:对于firefox浏览器，如果CSS放置在底部，firebox会将html结构先展示到页面上，然后再读取CSS并对html结构进行渲染，对相关元素进行渲染之后会刷新页面，表现为html内容无样式内容闪烁，随着页面的不断刷新，样式逐渐的展示出来。</p>
+<h1 id="3-async和defer的作用是什么？有什么区别？"><a href="#3-async和defer的作用是什么？有什么区别？" class="headerlink" title="3.async和defer的作用是什么？有什么区别？"></a>3.async和defer的作用是什么？有什么区别？</h1><p>async和defer都是<code>&lt;script&gt;</code>标签的布尔属性，都只对外部脚本文件有效。<br>其中对有async的script脚本文件，当浏览器加载到该脚本文件时，会同时加载后续的文档，也就是说加载该脚本文件和加载后续文档同时进行。正常情况下，对于没有async的脚本文件，浏览器会停止加载后续文档，等脚本文件下载并执行后才会加载后续文档。<br>而有defer的脚本文件，当浏览器加载到该脚本文件时，会同时加载后续的文档，而且会等文档全部加载完成才会执行该脚本文件。<br>它们的区别就是defer等到文档解析显示之后执行，有顺序，而async不保证顺序。</p>
+<h1 id="4-网页的渲染机制"><a href="#4-网页的渲染机制" class="headerlink" title="4.网页的渲染机制"></a>4.网页的渲染机制</h1><p>网页通过浏览器展示在我们面前，说网页的渲染机制就是说浏览器怎么渲染页面的。市面上浏览器主流浏览器chrome，firefox，ie，safari，opera，虽然品牌各不相同，但它们思路的渲染流程大致相同，只不过在有些细节方面有差异。</p>
+<h2 id="浏览器渲染的流程"><a href="#浏览器渲染的流程" class="headerlink" title="浏览器渲染的流程"></a>浏览器渲染的流程</h2><p><img src="xuanranliucheng.png" alt="xuanransilu.png"></p>
+<ol>
+<li>浏览器会先解析html文档，根据DOM节点构建“content tree”；</li>
+<li>浏览器解析css文本，获取样式，将样式和HTML中的dom节点对应，构建render tree;render tree由可视化元素节点和对应的样式组成，同时也确定了元素在页面上展现的顺序；</li>
+<li>构建好render tree 树后，浏览器会根据渲染树进行布局，计算好每个节点的位置和大小；</li>
+<li>最后就是把元素节点根据前面的处理结果绘制在浏览器的屏幕上；</li>
+</ol>
+<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p>有了大致的流程之后，接下来就是怎么实现了。</p>
+<h3 id="chrome等"><a href="#chrome等" class="headerlink" title="chrome等"></a>chrome等</h3><p><img src="chrome.png" alt="chromexuanran.png"></p>
+<ul>
+<li>解析 HTML 标签, 构建 DOM 树</li>
+<li>解析 CSS 标签, 构建 CSSOM 树</li>
+<li>把 DOM 和 CSSOM 组合成 渲染树 (render tree)</li>
+<li>在渲染树的基础上进行布局, 计算每个节点的几何结构</li>
+<li>把每个节点绘制到屏幕上 (painting)</li>
+</ul>
+<h3 id="firefox"><a href="#firefox" class="headerlink" title="firefox"></a>firefox</h3><p><img src="firefox.jpg" alt="firefoxxuanran.jpg"></p>
+<ul>
+<li>解析 HTML 标签到Content Sink</li>
+<li>这时，先加载Content Sink里面的内容，页面上会显示一个无样式的内容</li>
+<li>循环加载css样式，每次加载一部分css样式后，都会重现渲染页面</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myblog/2018/04/21/css综合内容/" rel="next" title="css综合内容">
+                <i class="fa fa-chevron-left"></i> css综合内容
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myblog/2018/04/21/数据类型-运算优先级/" rel="prev" title="数据类型,运算优先级">
+                数据类型,运算优先级 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/myblog/images/author.jpg" alt="Leojune">
+          <p class="site-author-name" itemprop="name">Leojune</p>
+           
+              <p class="site-description motion-element" itemprop="description">别停下来一停下来就停不下来</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/myblog/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/myblog/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/myblog/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/LeoJune" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2843805440?profile_ftype=1&is_all=1#_0" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="javascript:void(0)" target="_blank" title="593682855@qq.com">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                  593682855@qq.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-CSS和JS在网页中的放置顺序"><span class="nav-number">1.</span> <span class="nav-text">1.CSS和JS在网页中的放置顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-白屏和FOUC"><span class="nav-number">2.</span> <span class="nav-text">2.白屏和FOUC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-async和defer的作用是什么？有什么区别？"><span class="nav-number">3.</span> <span class="nav-text">3.async和defer的作用是什么？有什么区别？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-网页的渲染机制"><span class="nav-number">4.</span> <span class="nav-text">4.网页的渲染机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器渲染的流程"><span class="nav-number">4.1.</span> <span class="nav-text">浏览器渲染的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体步骤"><span class="nav-number">4.2.</span> <span class="nav-text">具体步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome等"><span class="nav-number">4.2.1.</span> <span class="nav-text">chrome等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#firefox"><span class="nav-number">4.2.2.</span> <span class="nav-text">firefox</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leojune</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/myblog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/myblog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/myblog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

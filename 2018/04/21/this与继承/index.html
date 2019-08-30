@@ -1,0 +1,735 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myblog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/myblog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="前端、博客">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myblog/images/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="#1.apply call bind的作用与区别apply call bind都是用来改变函数执行的上下文，也就是说，改变函数this的指向。区别：bind是返回对应函数，以便以后调用，而apply和call是立即调用，直接返回执行结果。apply于call的区别在于在接受参数的形式稍有区别。apply的调用形式是fn.apply(context,[argsArray]),接受数组形式的参数。ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this与继承">
+<meta property="og:url" content="http://yoursite.com/myblog/2018/04/21/this与继承/index.html">
+<meta property="og:site_name" content="今天风儿有些喧嚣">
+<meta property="og:description" content="#1.apply call bind的作用与区别apply call bind都是用来改变函数执行的上下文，也就是说，改变函数this的指向。区别：bind是返回对应函数，以便以后调用，而apply和call是立即调用，直接返回执行结果。apply于call的区别在于在接受参数的形式稍有区别。apply的调用形式是fn.apply(context,[argsArray]),接受数组形式的参数。ca">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6034528-eb7ceac107a3113a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-04-21T11:00:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="this与继承">
+<meta name="twitter:description" content="#1.apply call bind的作用与区别apply call bind都是用来改变函数执行的上下文，也就是说，改变函数this的指向。区别：bind是返回对应函数，以便以后调用，而apply和call是立即调用，直接返回执行结果。apply于call的区别在于在接受参数的形式稍有区别。apply的调用形式是fn.apply(context,[argsArray]),接受数组形式的参数。ca">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6034528-eb7ceac107a3113a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/myblog/2018/04/21/this与继承/">
+
+
+
+
+
+  <title> this与继承 | 今天风儿有些喧嚣 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">今天风儿有些喧嚣</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myblog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myblog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myblog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/myblog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/myblog/myblog/2018/04/21/this与继承/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leojune">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/myblog/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="今天风儿有些喧嚣">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                this与继承
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T19:00:02+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myblog/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#1.apply call bind的作用与区别<br>apply call bind都是用来改变函数执行的上下文，也就是说，改变函数this的指向。<br>区别：<br>bind是返回对应函数，以便以后调用，而apply和call是立即调用，直接返回执行结果。apply于call的区别在于在接受参数的形式稍有区别。apply的调用形式是<code>fn.apply(context,[argsArray])</code>,接受数组形式的参数。call的调用形式是<code>fn.call(context,arg1,arg2...)</code><br>eg.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">bind</span><br><span class="line"></span><br><span class="line">var obj1=&#123;</span><br><span class="line">  name:&quot;xiaoming&quot;,</span><br><span class="line">  fn:function()&#123;</span><br><span class="line">    console.log(this.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var obj2 = &#123;name:xiaohu&#125;</span><br><span class="line">var fn2 = obj1.fn.bind(obj2);</span><br><span class="line">fn2()   //xiaohu</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">call和apply</span><br><span class="line"></span><br><span class="line">数组中没有比较大小的方法</span><br><span class="line">var arr = [1,2,3,4];</span><br><span class="line">var arrMax = Math.max.apply(null,arr);//至于为什么传null，这里的结果与this无关，无论传什么都不会影响结果</span><br><span class="line"></span><br><span class="line">利用数组的join方法拼接字符串</span><br><span class="line">function joinStr()&#123;</span><br><span class="line">    return [].join.call(arguments,&apos;&apos;);</span><br><span class="line">&#125;</span><br><span class="line">//join用法   var arr=[a,b,c]  arr.join(&apos;-&apos;)   //a-b-c</span><br><span class="line">var str = joinStr(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;);   //abc</span><br></pre></td></tr></table></figure>
+<p>#2.代码输出<br>eg.1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var john = &#123;</span><br><span class="line">  firstName: &quot;john&quot;</span><br><span class="line">&#125;</span><br><span class="line">function func()&#123;</span><br><span class="line">  alert(this.firstName + &quot;: hi!&quot;)</span><br><span class="line">&#125;</span><br><span class="line">john.sayHi =func   </span><br><span class="line">john.sayHi()         //john:hi!        this就是指向john的</span><br></pre></td></tr></table></figure></p>
+<p>eg.2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func()         //window   首先函数申明提升，this指向window</span><br><span class="line">function func()&#123;</span><br><span class="line">  alert(this)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>eg.3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&quot;click&quot;,function(e)&#123;</span><br><span class="line">  console.log(this);</span><br><span class="line">  setTimeout(function()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;,200)</span><br><span class="line">&#125;,false)</span><br><span class="line">// document    事件中，this指向被绑定的dom对象</span><br><span class="line">//window      setTimeout中的this指向window</span><br></pre></td></tr></table></figure></p>
+<p>eg.4<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var john = &#123;</span><br><span class="line">  firstName : &quot;John&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function func()&#123;</span><br><span class="line">  alert(this.firstName)</span><br><span class="line">&#125;</span><br><span class="line">func.call(john)      //john  call把func的执行上下文改到john中</span><br></pre></td></tr></table></figure></p>
+<p>eg.5  如有问题就修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">var module=&#123;</span><br><span class="line">  bind: function()&#123;</span><br><span class="line">    $btn.on(&apos;click&apos;,function()&#123;</span><br><span class="line">      console.log(this) // this指什么     </span><br><span class="line">      this.showMsg();</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  showMsg: function()&#123;</span><br><span class="line">    console.log(&apos;小明&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// this指$btn  $btn并无showMsg方法，this在作为对象的方法调用的时候指向这个上级对象，所以可以采取两种方法</span><br><span class="line"></span><br><span class="line">方法1</span><br><span class="line">在this指向改变前，先把需要的this保存下来</span><br><span class="line">var module=&#123;</span><br><span class="line">  bind: function()&#123;</span><br><span class="line">    var _this = this     //_this就吧module保存下来了</span><br><span class="line">    $btn.on(&apos;click&apos;,function()&#123;</span><br><span class="line">      console.log(this)    // this指什么     </span><br><span class="line">      _this.showMsg();  </span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  showMsg: function()&#123;</span><br><span class="line">    console.log(&apos;小明&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">方法二</span><br><span class="line">用bind把this的指向重新指向module</span><br><span class="line">var module=&#123;</span><br><span class="line">  bind: function()&#123;</span><br><span class="line">    $btn.on(&apos;click&apos;,function()&#123;</span><br><span class="line">      console.log(this) // this指什么     </span><br><span class="line">      this.showMsg();</span><br><span class="line">    &#125;.bind(this))</span><br><span class="line">  &#125;,</span><br><span class="line">  showMsg: function()&#123;</span><br><span class="line">    console.log(&apos;小明&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#3.解释代码中<code>Person</code>,<code>prototype</code>,<code>_proto</code>,<code>p</code>,<code>construtor</code>之间的关联<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.sayName =function()&#123;</span><br><span class="line">  console.log(&quot;my name is :&quot; + this.name)</span><br><span class="line">&#125;</span><br><span class="line">var p = new Person(&quot;若愚&quot;)</span><br><span class="line">p.sayName()</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6034528-eb7ceac107a3113a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="原型.png"></p>
+<p>#4.对对象p调用<code>p.toString()</code> ,画出这一过程的原型图，解释原型链<br>也如上图，p是是Person的一个实例，每一个Person的实例都有<em>proto</em>,<br>指向Person的原型链Prototype，Person.prototype中的construtor指向函数Person，Person也是一个对象,所以Proson.prototype.<em>proto</em>指向了对象，而Object中就有toString()方法。</p>
+<p>在调用p.toString()的时候，首先会现在实例p中寻找toString(),没找到就在<em>proto</em>，也就是Person.prototype中寻找，还没找到，就继续向原型方向p.<em>proto</em>.<em>proto</em>中寻找，找到了，拿出来使用。</p>
+<p>#5.对str做拓展，实现获取字符串中出现频率最高的字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">String.prototype.getMostOfften = function()&#123;</span><br><span class="line">  var obj = &#123;&#125;,</span><br><span class="line">      maxTime = 0,</span><br><span class="line">      tarLetter;  </span><br><span class="line">  for(var i=0; i&lt;this.length; i++)&#123;</span><br><span class="line">    var key = this[i]</span><br><span class="line">    if (!obj[key]) &#123;</span><br><span class="line">         obj[key] = 1;</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">          obj[key]++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  for(key in obj)&#123;</span><br><span class="line">    if(obj[key] &gt; maxTime)&#123;</span><br><span class="line">      maxTime = obj[key]</span><br><span class="line">      tarLetter = key;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">   return tarLetter;</span><br><span class="line">&#125;</span><br><span class="line">var str = &quot;ahbbccdeeddddfg&quot;;</span><br><span class="line">var ch = str.getMostOfften();</span><br><span class="line"></span><br><span class="line">console.log(ch) // d   5ci</span><br></pre></td></tr></table></figure></p>
+<p>#6.<code>instanceOf</code>有什么用？内部逻辑如何实现？<br>instanceOf用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性</p>
+<p>内部逻辑：沿着原型链向上查找，查找对象的原型链上的 <strong> proto </strong> 属性是否是某个构造函数的prototype属性，若存在则返回true，若查找到顶端也没找到则返回false。</p>
+<p>#7.继承有什么作用？<br>继承可以使子类共享父类的属性和方法，覆盖和扩展父类的属性和方法</p>
+<p>#8.两种写法的代码区别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//fangfa1</span><br><span class="line">function People(name,sex)&#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.sex = sex;</span><br><span class="line">  this.printName = function()&#123;</span><br><span class="line">    console.log(this.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p1 = new People(&quot;小明&quot;，18)</span><br><span class="line">var p2 = new People(&quot;xiaohu&quot;,19)</span><br><span class="line">console.log(p1.printName==p2.printName) //false</span><br><span class="line"></span><br><span class="line">printName()是在每创建一个实例的时候都会创建一遍,所以二者并不相等</span><br><span class="line"></span><br><span class="line">//fangfa2</span><br><span class="line">function Person(name,sex)&#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.sex = sex;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.printName = function()&#123;</span><br><span class="line">  console.log(this.name)</span><br><span class="line">&#125;</span><br><span class="line">var p1 = new Person(&quot;小虎&quot;，20)</span><br><span class="line">var p1 = new Person(&quot;xiaoming&quot;，20)</span><br><span class="line"></span><br><span class="line">console.log(p1.printName==p2.printName) // true</span><br><span class="line">二者相等，证明二者指向了同一个函数，printName这一函数制备创建了一遍，是公用的。可节省内存。</span><br></pre></td></tr></table></figure></p>
+<p>#9.<code>Object.create</code>有什么用？兼容性<br>Object.create是在ES5中规定的 ，作用是使用指定的原型对象及其属性去创建一个新的对象，IE9以下无效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">Object.create(proto, [ propertiesObject ])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//Shape - superclass</span><br><span class="line">function Shape() &#123;</span><br><span class="line">  this.x = 0;</span><br><span class="line">  this.y = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Shape.prototype.move = function(x, y) &#123;</span><br><span class="line">    this.x += x;</span><br><span class="line">    this.y += y;</span><br><span class="line">    console.info(&quot;Shape moved.&quot;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// Rectangle - subclass</span><br><span class="line">function Rectangle() &#123;</span><br><span class="line">  Shape.call(this); //call super constructor.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// subclass extends superclass</span><br><span class="line">Rectangle.prototype = Object.create(Shape.prototype);</span><br><span class="line">Rectangle.prototype.constructor = Rectangle;</span><br><span class="line"></span><br><span class="line">var rect = new Rectangle();</span><br><span class="line"></span><br><span class="line">console.log(&apos;Is rect an instance of Rectangle?&apos;,</span><br><span class="line">  rect instanceof Rectangle); // true</span><br><span class="line">console.log(&apos;Is rect an instance of Shape?&apos;,</span><br><span class="line">  rect instanceof Shape); // true</span><br><span class="line"></span><br><span class="line">rect.move(1, 1); //Outputs, &quot;Shape moved.&quot;</span><br></pre></td></tr></table></figure></p>
+<p>#10.<code>hasOwnProperty</code>有什么用？怎么用<br>hasOwnProperty() 方法会返回一个布尔值，指示对象是否具有指定的属性作为自身（不继承）属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">o = new Object();</span><br><span class="line">o.prop = &apos;exists&apos;;</span><br><span class="line"></span><br><span class="line">function changeO() &#123;</span><br><span class="line">  o.newprop = o.prop;</span><br><span class="line">  delete o.prop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">o.hasOwnProperty(&apos;prop&apos;);   // 返回 true</span><br><span class="line">changeO();</span><br><span class="line">o.hasOwnProperty(&apos;prop&apos;);   // 返回 false</span><br></pre></td></tr></table></figure></p>
+<p>#11.代码中的call作用什么？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,sex)&#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.sex = sex;</span><br><span class="line">&#125;</span><br><span class="line">function Male(name,sex,age)&#123;</span><br><span class="line">  Person.call(this,name,sex) // 这里的call把Male函数里的this传递给Person，作为Person执行的上下文，这样Male也拥有自己的name和sex属性。</span><br><span class="line">  this.age = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#12.实现继承<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,sex)&#123;</span><br><span class="line">  this.name = name</span><br><span class="line">  this.sex = sex</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.getName = function()&#123;</span><br><span class="line">  console.log(&quot;my name is &quot; + this.name)</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.printName = function()&#123;</span><br><span class="line">  console.log(&quot;my name is &quot; + this.name + &quot; and I am &quot; + this.age + &quot; years old&quot;)</span><br><span class="line">&#125;</span><br><span class="line">function Male(name,sex,age)&#123;</span><br><span class="line">  Person.call(this,name,sex)</span><br><span class="line">  this.age = age</span><br><span class="line">&#125;</span><br><span class="line">Male.prototype.getAge = function()&#123;</span><br><span class="line">  console.log(&quot;I am &quot; + this.age + &quot;years old&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Male.prototype=Object.create(Person.prototype)</span><br><span class="line">Male.prototype.__proto__.constructor = Male</span><br><span class="line"></span><br><span class="line">var xiaoming = new Male(&apos;小明&apos;,&apos;男&apos;,18);</span><br><span class="line">xiaoming.printName();</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myblog/2018/04/21/对象，原型/" rel="next" title="对象，原型">
+                <i class="fa fa-chevron-left"></i> 对象，原型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myblog/2018/04/21/面相对象，组件化/" rel="prev" title="面相对象，组件化">
+                面相对象，组件化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/myblog/images/author.jpg" alt="Leojune">
+          <p class="site-author-name" itemprop="name">Leojune</p>
+           
+              <p class="site-description motion-element" itemprop="description">别停下来一停下来就停不下来</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/myblog/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/myblog/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/myblog/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/LeoJune" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2843805440?profile_ftype=1&is_all=1#_0" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="javascript:void(0)" target="_blank" title="593682855@qq.com">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                  593682855@qq.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leojune</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/myblog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/myblog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/myblog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,778 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myblog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/myblog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="前端、博客">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myblog/images/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="1. class与id的使用场景 一个页面中可以有多个同样的class，可以用于不同标签但是样式相同的元素上。 一个页面中只允许有一个id，id具有唯一性，多用于标记页面分级的块级标签上。  2.css选择器常见的有几种 基础选择器 * 通用选择器，选择页面上的所有元素#id id选择器，选择对应id的元素.class class选择器，选择对应class的一个或多个元素element 标签选择器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS选择器">
+<meta property="og:url" content="http://yoursite.com/myblog/2018/04/21/CSS选择器/index.html">
+<meta property="og:site_name" content="今天风儿有些喧嚣">
+<meta property="og:description" content="1. class与id的使用场景 一个页面中可以有多个同样的class，可以用于不同标签但是样式相同的元素上。 一个页面中只允许有一个id，id具有唯一性，多用于标记页面分级的块级标签上。  2.css选择器常见的有几种 基础选择器 * 通用选择器，选择页面上的所有元素#id id选择器，选择对应id的元素.class class选择器，选择对应class的一个或多个元素element 标签选择器">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-21T07:25:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS选择器">
+<meta name="twitter:description" content="1. class与id的使用场景 一个页面中可以有多个同样的class，可以用于不同标签但是样式相同的元素上。 一个页面中只允许有一个id，id具有唯一性，多用于标记页面分级的块级标签上。  2.css选择器常见的有几种 基础选择器 * 通用选择器，选择页面上的所有元素#id id选择器，选择对应id的元素.class class选择器，选择对应class的一个或多个元素element 标签选择器">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/myblog/2018/04/21/CSS选择器/">
+
+
+
+
+
+  <title> CSS选择器 | 今天风儿有些喧嚣 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">今天风儿有些喧嚣</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myblog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myblog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myblog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/myblog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/myblog/myblog/2018/04/21/CSS选择器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leojune">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/myblog/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="今天风儿有些喧嚣">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS选择器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T15:23:23+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myblog/categories/base/" itemprop="url" rel="index">
+                    <span itemprop="name">base</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myblog/categories/base/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-class与id的使用场景"><a href="#1-class与id的使用场景" class="headerlink" title="1. class与id的使用场景"></a>1. class与id的使用场景</h1><ul>
+<li>一个页面中可以有多个同样的class，可以用于不同标签但是样式相同的元素上。</li>
+<li>一个页面中只允许有一个id，id具有唯一性，多用于标记页面分级的块级标签上。</li>
+</ul>
+<h1 id="2-css选择器常见的有几种"><a href="#2-css选择器常见的有几种" class="headerlink" title="2.css选择器常见的有几种"></a>2.css选择器常见的有几种</h1><ol>
+<li><p>基础选择器<br> <code>*</code> 通用选择器，选择页面上的所有元素<br><code>#id</code> id选择器，选择对应id的元素<br><code>.class</code> class选择器，选择对应class的一个或多个元素<br><code>element</code> 标签选择器，选择对应标签名的一个或多个元素</p>
+</li>
+<li><p>组合选择器<br><code>E,F,...</code> 多元素选择器，用逗号隔开的表示选择多个元素，E,F或更多都是并列关系，他们同时被选取<br><code>E F</code> 后代选择器，用空格隔开的表示选取E的后代中的F元素<br><code>E&gt;F</code> 子元素选择器，表示选取E的直接后代中所有F元素，与上一条的区别在于是不是子元素。<br>eg：<code>div&gt;p</code> 此例中只会选择class为p1的p元素，p2不会被选取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p class=&quot;p1&quot;&gt;&lt;/p&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p class=&quot;p2&quot;&gt;&lt;/p&gt;   </span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>E+F</code> 直接相邻选择器，表示选取E元素之后相邻的同级F元素<br><code>E~F</code> 普通相邻选择器，表示选取E元素后面的同级F元素，不论相邻与否。</p>
+<ol start="3">
+<li>属性选择器<br><code>E[attr]</code> 选取具有该属性的元素。eg.<code>p[name]</code> 选取所有有name属性的p元素。<br><code>E[attr=value]</code> 选取所有attr属性的属性值为value的元素 eg.<code>p[name=&quot;p1&quot;]</code> 会选取所有name属性为 p1 的p元素  </li>
+</ol>
+<p>4.伪类选择器<br><code>E:first-child</code> 选取作为父元素第一个子元素的E元素（实际形式是<code>F E:first-child</code>  区别于 <code>E&gt;:first-child</code>）<br><code>E:last-child</code> 选取作为父元素最后一个个子元素的E元素<br><code>E:nth-child()</code> 选取作为父元素第n个子元素的E元素，n从1开始取，n为1的时候等价于<code>first-child</code> 选择器<br><code>E:hover/link/active/visited</code> 选取E元素的某一状态，给对应状态添加样式</p>
+<ol start="5">
+<li>伪元素选择器<br><code>E:first-letter</code> 选取E元素的第一个字母。eg. <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p:first-letter&#123;color:red&#125;  //n的颜色是红色</span><br><span class="line">&lt;p&gt;nihao&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>E:before/after</code> E元素的前面或后面的元素，一般用于在E元素的前面或后面插入元素，可用来清除浮动，或添加元素。</p>
+<h1 id="3-选择器的优先级，复杂场景如何计算优先级"><a href="#3-选择器的优先级，复杂场景如何计算优先级" class="headerlink" title="3. 选择器的优先级，复杂场景如何计算优先级"></a>3. 选择器的优先级，复杂场景如何计算优先级</h1><p>它们之间的顺序排列如下：<br>@import &gt; 内联样式 &gt; id选择器 &gt; 类选择器、伪类选择器、属性选择器 &gt; 标签选择器、伪元素选择器</p>
+<p>在复杂的场景（即在应用了各种的css选择器的组合两条或更多的css规则冲突时），会先比较优先级较高的选择器个数，如果还相同则继续向下，比较优先级较低的选择器的个数，以此类推。</p>
+<h1 id="4-a-link-a-hover-a-active-a-visited-的顺序"><a href="#4-a-link-a-hover-a-active-a-visited-的顺序" class="headerlink" title="4. a:link, a:hover, a:active, a:visited 的顺序"></a>4. a:link, a:hover, a:active, a:visited 的顺序</h1><p>他们的顺序是 a:link, a:visited,a:hover,a:active（鼠标按下去时的状态）<br>至于为什么这么拍，首先，他们都是伪类选择器，相同的选择器优先级别当然相同，所以自然而然会排在后面的覆盖前面的样式。a:hover如果在a:visited后面的话，那么当该链接访问过后，就会一直保持访问后的样式，鼠标滑上去即hover样式怎么也不会生效，因为被覆盖了。至于a:active,放在前面的话那么样式不会生效，active生效的场景，hover也会生效，hover就会覆盖active。</p>
+<h1 id="5-常见选择器实例"><a href="#5-常见选择器实例" class="headerlink" title="5. 常见选择器实例"></a>5. 常见选择器实例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#header  //选择id为header的元素</span><br><span class="line">.header  //选择class为header的所有元素</span><br><span class="line">.header .logo //选择class为header的所有元素后代中class为logo的所有元素</span><br><span class="line">.header.mobile // 选择class为header和mobile的所有元素 eg. &lt;p class=&quot;header mobile&quot;&gt;&lt;/p&gt;</span><br><span class="line">.header p,.header h3 //选取class为header的所有元素的后代中 p 元素和 h3 元素</span><br><span class="line">#header .nav&gt;li //id为header元素中后代中class为nav的元素的所有 li 子元素</span><br><span class="line">#header a:hover  //id为header元素中的所有a标签的hover状态</span><br><span class="line">#header .logo~p //id为header的元素后代中class为logo的元素的所有同级的p元素</span><br><span class="line">#header input[type=&quot;text&quot;] //id为header的元素后代中有属性type且其值为text的所有input元素</span><br></pre></td></tr></table></figure>
+<h1 id="6-伪类选择器"><a href="#6-伪类选择器" class="headerlink" title="6.伪类选择器"></a>6.伪类选择器</h1><p><code>E:first-child</code> 选取作为父元素第一个子元素的E元素<br><code>E:last-child</code> 选取作为父元素最后一个个子元素的E元素<br><code>E:nth-child()</code> 选取作为父元素第n个子元素的E元素，n从1开始取，n为1的时候等价于<code>first-child</code> 选择器<br><code>E:hover/link/active/visited</code> 选取E元素的某一状态，给对应状态添加样式<br><code>E:enabled</code> 选取表单中可用的元素<br><code>E:disabled</code> 选取表单中禁用的元素</p>
+<h1 id="7-div-first-child、div-first-of-type、div-first-child和div-first-of-type的作用和区别"><a href="#7-div-first-child、div-first-of-type、div-first-child和div-first-of-type的作用和区别" class="headerlink" title="7. div:first-child、div:first-of-type、div :first-child和div :first-of-type的作用和区别"></a>7. div:first-child、div:first-of-type、div :first-child和div :first-of-type的作用和区别</h1><p><code>div:first-child</code> 选取作为父元素第一个子元素的div元素<br><code>div:first-of-type</code> 选取父元素中第一个出现的div元素（后面的div就不选取了）<br><code>div :first-child</code> 选取所有div元素中第一个子元素<br><code>div :first-of-type</code> 选取所有div元素中第一个出现的各类元素 eg.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;h3&gt;&lt;/h3&gt;  //选中</span><br><span class="line">  &lt;p&gt;&lt;/p&gt;     //选中</span><br><span class="line">  &lt;div&gt;&lt;/div&gt;  //选中</span><br><span class="line">  &lt;div&gt;&lt;/div&gt;</span><br><span class="line">  &lt;p&gt;&lt;/p&gt;</span><br><span class="line">  &lt;p&gt;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">div :first-of-type //选取的如标示</span><br></pre></td></tr></table></figure></p>
+<h1 id="8-代码实践"><a href="#8-代码实践" class="headerlink" title="8. 代码实践"></a>8. 代码实践</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">.item1:first-child&#123;</span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line">.item1:first-of-type&#123;</span><br><span class="line">  background: blue;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"> &lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">   &lt;p class=&quot;item1&quot;&gt;aa&lt;/p&gt;</span><br><span class="line">   &lt;h3 class=&quot;item1&quot;&gt;bb&lt;/h3&gt;</span><br><span class="line">   &lt;h3 class=&quot;item1&quot;&gt;ccc&lt;/h3&gt;</span><br><span class="line"> &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><code>.item1:first-child</code> 选取作为父元素第一个子元素的class为item1的元素，自然aa的颜色要变红<br><code>.item1:first-of-type</code> 选取作为父元素第一个出现的各类class为item1的元素，aa所在的p元素第一次出现，bb所在的h3元素第一次出现，都被选中，cc所在的h3在bb后面，因为h3标签出现过一次，所以不再被选中。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myblog/2018/04/21/CSS相关知识/" rel="next" title="CSS相关知识">
+                <i class="fa fa-chevron-left"></i> CSS相关知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myblog/2018/04/21/css常见样式/" rel="prev" title="css常见样式">
+                css常见样式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/myblog/images/author.jpg" alt="Leojune">
+          <p class="site-author-name" itemprop="name">Leojune</p>
+           
+              <p class="site-description motion-element" itemprop="description">别停下来一停下来就停不下来</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/myblog/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/myblog/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/myblog/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/LeoJune" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2843805440?profile_ftype=1&is_all=1#_0" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="javascript:void(0)" target="_blank" title="593682855@qq.com">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                  593682855@qq.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-class与id的使用场景"><span class="nav-number">1.</span> <span class="nav-text">1. class与id的使用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-css选择器常见的有几种"><span class="nav-number">2.</span> <span class="nav-text">2.css选择器常见的有几种</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-选择器的优先级，复杂场景如何计算优先级"><span class="nav-number">3.</span> <span class="nav-text">3. 选择器的优先级，复杂场景如何计算优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-a-link-a-hover-a-active-a-visited-的顺序"><span class="nav-number">4.</span> <span class="nav-text">4. a:link, a:hover, a:active, a:visited 的顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-常见选择器实例"><span class="nav-number">5.</span> <span class="nav-text">5. 常见选择器实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-伪类选择器"><span class="nav-number">6.</span> <span class="nav-text">6.伪类选择器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-div-first-child、div-first-of-type、div-first-child和div-first-of-type的作用和区别"><span class="nav-number">7.</span> <span class="nav-text">7. div:first-child、div:first-of-type、div :first-child和div :first-of-type的作用和区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-代码实践"><span class="nav-number">8.</span> <span class="nav-text">8. 代码实践</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leojune</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/myblog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/myblog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/myblog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

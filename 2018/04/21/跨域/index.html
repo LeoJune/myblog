@@ -1,0 +1,836 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myblog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/myblog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="跨域,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myblog/images/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="1.什么是同源策略同源策略（Same origin Policy）：浏览器出于安全性考虑，只允许与本域下的接口交互，不同源的客户端脚本在没有明确授权的情况下，不能读写对方的资源。 如果协议，端口（如果指定了一个）和域名对于两个页面是相同的，则两个页面具有相同的源。例如：http://store.company.com/dir/page.html    URL 结果 原因     http://st">
+<meta name="keywords" content="跨域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨域">
+<meta property="og:url" content="http://yoursite.com/myblog/2018/04/21/跨域/index.html">
+<meta property="og:site_name" content="今天风儿有些喧嚣">
+<meta property="og:description" content="1.什么是同源策略同源策略（Same origin Policy）：浏览器出于安全性考虑，只允许与本域下的接口交互，不同源的客户端脚本在没有明确授权的情况下，不能读写对方的资源。 如果协议，端口（如果指定了一个）和域名对于两个页面是相同的，则两个页面具有相同的源。例如：http://store.company.com/dir/page.html    URL 结果 原因     http://st">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/myblog/2018/04/21/跨域/postMessage.png">
+<meta property="og:image" content="http://yoursite.com/myblog/2018/04/21/跨域/降域.png">
+<meta property="og:updated_time" content="2018-04-21T10:43:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨域">
+<meta name="twitter:description" content="1.什么是同源策略同源策略（Same origin Policy）：浏览器出于安全性考虑，只允许与本域下的接口交互，不同源的客户端脚本在没有明确授权的情况下，不能读写对方的资源。 如果协议，端口（如果指定了一个）和域名对于两个页面是相同的，则两个页面具有相同的源。例如：http://store.company.com/dir/page.html    URL 结果 原因     http://st">
+<meta name="twitter:image" content="http://yoursite.com/myblog/2018/04/21/跨域/postMessage.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/myblog/2018/04/21/跨域/">
+
+
+
+
+
+  <title> 跨域 | 今天风儿有些喧嚣 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">今天风儿有些喧嚣</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myblog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myblog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myblog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/myblog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/myblog/myblog/2018/04/21/跨域/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leojune">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/myblog/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="今天风儿有些喧嚣">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                跨域
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T18:17:28+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myblog/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-什么是同源策略"><a href="#1-什么是同源策略" class="headerlink" title="1.什么是同源策略"></a>1.什么是同源策略</h1><p>同源策略（Same origin Policy）：浏览器出于安全性考虑，只允许与本域下的接口交互，不同源的客户端脚本在没有明确授权的情况下，不能读写对方的资源。</p>
+<p>如果协议，端口（如果指定了一个）和域名对于两个页面是相同的，则两个页面具有相同的源。<br>例如：<a href="http://store.company.com/dir/page.html" target="_blank" rel="noopener">http://store.company.com/dir/page.html</a></p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>结果</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://store.company.com/dir2/other.html" target="_blank" rel="noopener">http://store.company.com/dir2/other.html</a></td>
+<td>同源</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://store.company.com/dir/inner/another.html" target="_blank" rel="noopener">http://store.company.com/dir/inner/another.html</a></td>
+<td>同源</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://store.company.com/secure.html" target="_blank" rel="noopener">https://store.company.com/secure.html</a></td>
+<td>不同源</td>
+<td>协议不同</td>
+</tr>
+<tr>
+<td><a href="http://store.company.com:81/dir/etc.html" target="_blank" rel="noopener">http://store.company.com:81/dir/etc.html</a></td>
+<td>不同源</td>
+<td>端口不同</td>
+</tr>
+<tr>
+<td><a href="http://news.company.com/dir/other.html" target="_blank" rel="noopener">http://news.company.com/dir/other.html</a></td>
+<td>不同源</td>
+<td>域名不同</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-什么是跨域？跨域有几种实现形式"><a href="#2-什么是跨域？跨域有几种实现形式" class="headerlink" title="2.什么是跨域？跨域有几种实现形式"></a>2.什么是跨域？跨域有几种实现形式</h1><p>跨域就是向不同源的地址请求资源或者是进行操作。常见的形式有：jsonp，cores，postMassage，降域。</p>
+<h1 id="3-JSONP"><a href="#3-JSONP" class="headerlink" title="3.JSONP"></a>3.JSONP</h1><p>JSONP（JSON with Padding）:jsonp不是json数据，JSON是一种数据格式，而JSONP是一种数据调用方式，是解决JSON跨域获取的解决方案。因此JSONP其实是一个非官方的协议。</p>
+<ul>
+<li>原理： 网页通过添加一个<code>&lt;script&gt;</code>元素，向服务器请求JSON数据，这种做法不受同源政策限制；服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。</li>
+<li>具体实现方式：<ol>
+<li>定义数据处理函数fun </li>
+<li>创建script标签，src的地址执行后端接口，最后加个参数callback=fun</li>
+<li>服务端在收到请求后，解析参数，计算返还数据，输出 fun(data) 字符串。</li>
+<li>fun(data)会放到script标签做为js执行。此时会调用fun函数，将data做为参数。 </li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">前端代码</span><br><span class="line">从http://localhost:8080发出请求，向http://127.0.0.1:8080请求数据，域名不同，明显属于跨域</span><br><span class="line"></span><br><span class="line">$(&apos;.change&apos;).addEventListener(&apos;click&apos;, function()&#123;</span><br><span class="line">    var script = document.createElement(&apos;script&apos;);</span><br><span class="line">    script.src = &apos;http://127.0.0.1:8080/getNews?callback=appendHtml&apos;;</span><br><span class="line">    document.head.appendChild(script);</span><br><span class="line">    document.head.removeChild(script);</span><br><span class="line">  &#125;)</span><br><span class="line">  function appendHtml(news)&#123;</span><br><span class="line">    var html = &apos;&apos;;</span><br><span class="line">    for( var i=0; i&lt;news.length; i++)&#123;</span><br><span class="line">      html += &apos;&lt;li&gt;&apos; + news[i] + &apos;&lt;/li&gt;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(html);</span><br><span class="line">    $(&apos;.news&apos;).innerHTML = html;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">后端代码</span><br><span class="line">app.get(&apos;/getNews&apos;, function(req, res)&#123;</span><br><span class="line"></span><br><span class="line">  var news = [</span><br><span class="line">    &quot;第11日前瞻：中国冲击4金 博尔特再战200米羽球&quot;,</span><br><span class="line">    &quot;正直播柴飚/洪炜出战 男双力争会师决赛&quot;,</span><br><span class="line">    &quot;女排将死磕巴西！郎平安排男陪练模仿对方核心&quot;,</span><br><span class="line">    &quot;没有中国选手和巨星的110米栏 我们还看吗？&quot;,</span><br><span class="line">    &quot;中英上演奥运金牌大战&quot;,</span><br><span class="line">    &quot;博彩赔率挺中国夺回第二纽约时报：中国因对手服禁药而丢失的奖牌最多&quot;,</span><br><span class="line">    &quot;最“出柜”奥运？同性之爱闪耀里约&quot;,</span><br><span class="line">    &quot;下跪拜谢与洪荒之力一样 都是真情流露&quot;</span><br><span class="line">  ]</span><br><span class="line">  var data = [];</span><br><span class="line">  for(var i=0; i&lt;3; i++)&#123;</span><br><span class="line">    var index = parseInt(Math.random()*news.length);</span><br><span class="line">    data.push(news[index]);</span><br><span class="line">    news.splice(index, 1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  var cb = req.query.callback;   // 获取回调函数</span><br><span class="line">  if(cb)&#123;</span><br><span class="line">    res.send(cb + &apos;(&apos;+ JSON.stringify(data) + &apos;)&apos;); // 组成函数调用时形式的字符串</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    res.send(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>JSONP只能用get请求来实现，JSONP的优势在于支持老式浏览器</p>
+<h1 id="4-CORS"><a href="#4-CORS" class="headerlink" title="4.CORS"></a>4.CORS</h1><p>CORS 全称是跨域资源共享（Cross-Origin Resource Sharing），是一种 ajax 跨域请求资源的方式，支持现代浏览器，IE支持10以上。 实现方式很简单，当你使用 <code>XMLHttpRequest</code>发送请求时，浏览器发现该请求不符合同源策略，会给该请求加一个请求头：Origin，后台进行一系列处理，如果确定接受请求则在返回结果中加入一个响应头：<code>Access-Control-Allow-Origin</code>; 浏览器判断该相应头中是否包含 Origin 的值，如果有则浏览器会处理响应，我们就可以拿到响应数据，如果不包含浏览器直接驳回，这时我们无法拿到响应数据。</p>
+<p>具体实现方式：</p>
+<ol>
+<li>当使用 <code>XMLHttpRequest</code>发送请求时，浏览器发现该请求不符合同源策略，会给该请求加一个请求头：Origin，后台进行一系列处理</li>
+<li>如果确定接受请求则在返回结果中加入一个响应头：<code>Access-Control-Allow-Origin</code></li>
+<li>浏览器判断该相应头中是否包含 Origin 的值,包含则处理响应，我们成功拿到返回的数据。不包含则由于同源策略的限制，无视响应，我们无法拿到数据</li>
+</ol>
+<p>CORS分为简单请求和需预检的请求：</p>
+<ul>
+<li><p>简单请求：满足以下所有条件的请求是简单请求，不需要预检</p>
+<ol>
+<li>请求方式是这几种之一：HEAD GET POST</li>
+<li>HTTP的头信息不超过以下几种字段：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Accept   Accept-Language 	 Content-Language    Last-Event-ID   </span><br><span class="line">                                                                                 </span><br><span class="line">Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>需预检的请求：凡是不能满足简单请求的条件的请求就是需预检的请求</p>
+<ul>
+<li>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）</li>
+<li>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头 信息字段。只有得到肯定答复，浏览器才会发出正式的<code>XMLHttpRequest</code>请求，否则就报错。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">前端代码</span><br><span class="line">从a.jrg.com发送ajax请求，向b.jrg.com请求数据</span><br><span class="line"> $(&apos;.change&apos;).addEventListener(&apos;click&apos;, function()&#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line">    xhr.open(&apos;get&apos;, &apos;http://b.jrg.com:8080/getNews&apos;, true);</span><br><span class="line">    xhr.send();</span><br><span class="line">    xhr.onreadystatechange = function()&#123;</span><br><span class="line">      if(xhr.readyState === 4 &amp;&amp; xhr.status === 200)&#123;</span><br><span class="line">        appendHtml( JSON.parse(xhr.responseText) )</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    window.xhr = xhr</span><br><span class="line">  &#125;)</span><br><span class="line">  function appendHtml(news)&#123;</span><br><span class="line">    var html = &apos;&apos;;</span><br><span class="line">    for( var i=0; i&lt;news.length; i++)&#123;</span><br><span class="line">      html += &apos;&lt;li&gt;&apos; + news[i] + &apos;&lt;/li&gt;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(html);</span><br><span class="line">    $(&apos;.news&apos;).innerHTML = html;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">后台代码</span><br><span class="line">app.get(&apos;/getNews&apos;, function(req, res)&#123;</span><br><span class="line"></span><br><span class="line">  var news = [</span><br><span class="line">    &quot;第11日前瞻：中国冲击4金 博尔特再战200米羽球&quot;,</span><br><span class="line">    &quot;正直播柴飚/洪炜出战 男双力争会师决赛&quot;,</span><br><span class="line">    &quot;女排将死磕巴西！郎平安排男陪练模仿对方核心&quot;,</span><br><span class="line">    &quot;没有中国选手和巨星的110米栏 我们还看吗？&quot;,</span><br><span class="line">    &quot;中英上演奥运金牌大战&quot;,</span><br><span class="line">    &quot;博彩赔率挺中国夺回第二纽约时报：中国因对手服禁药而丢失的奖牌最多&quot;,</span><br><span class="line">    &quot;最“出柜”奥运？同性之爱闪耀里约&quot;,</span><br><span class="line">    &quot;下跪拜谢与洪荒之力一样 都是真情流露&quot;</span><br><span class="line">  ]</span><br><span class="line">  var data = [];</span><br><span class="line">  for(var i=0; i&lt;3; i++)&#123;</span><br><span class="line">    var index = parseInt(Math.random()*news.length);</span><br><span class="line">    data.push(news[index]);</span><br><span class="line">    news.splice(index, 1);</span><br><span class="line">  &#125;</span><br><span class="line">  res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;http://a.jrg.com:8080&quot;); //在响应的头部添加允许其请求的地址，浏览器在接受到响应后，两者的地址比较，相同则返回响应数据，跨域成功。不同则拦截返回的数据（就是不给你看）。</span><br><span class="line">  //res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);    //*代表所有地址都是可行的</span><br><span class="line">  res.send(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>CORS支持所有类型的HTTP请求，但是只有现代浏览器和ie10以上的浏览器支持。</p>
+<h1 id="5-postMessage"><a href="#5-postMessage" class="headerlink" title="5.postMessage"></a>5.postMessage</h1><p>postMessage()是HTML5的一个API，使用这种方法最重要的就是发送消息和接受消息。在页面A中向页面B发送请求，然后在页面B中监听请求并获取A发送的数据，即可实现跨域。</p>
+<p>页面A发送消息：调用postMessage API向目标窗口B 发送消息<br><code>window.postMessage(data, origin)</code><br>页面B接收消息：目标窗口B监听message事件<br><code>window.addEventListener(&#39;message&#39;,function (e) { console.log(e.origin,e.data) })</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">页面a   a.jrg.com/a.html  像localhost:8080/b.html发送信息</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">  &lt;h1&gt;使用postMessage实现跨域&lt;/h1&gt;</span><br><span class="line">  &lt;div class=&quot;main&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; placeholder=&quot;http://a.jrg.com:8080/a.html&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;iframe src=&quot;http://localhost:8080/b.html&quot; frameborder=&quot;0&quot; &gt;&lt;/iframe&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">//URL: http://a.jrg.com:8080/a.html</span><br><span class="line">$(&apos;.main input&apos;).addEventListener(&apos;input&apos;, function()&#123;</span><br><span class="line">  window.frames[0].postMessage(this.value,&apos;http://localhost:8080/b.html&apos;);   // 向http://localhost:8080/b.html发送信息</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">页面b</span><br><span class="line"></span><br><span class="line">window.addEventListener(&apos;message&apos;,function(e) &#123;   //监听message事件，接收信息并输入</span><br><span class="line">    $(&apos;#input&apos;).value = e.data</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="postMessage.png" alt="postMessage"></p>
+<h1 id="6-降域"><a href="#6-降域" class="headerlink" title="6.降域"></a>6.降域</h1><p>此种方法需要主域相同且子域不同，有较大限制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">页面a</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">  &lt;h1&gt;使用降域实现跨域&lt;/h1&gt;</span><br><span class="line">  &lt;div class=&quot;main&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; placeholder=&quot;http://a.jrg.com:8080/a.html&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;iframe src=&quot;http://b.jrg.com:8080/b.html&quot; frameborder=&quot;0&quot; &gt;&lt;/iframe&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">document.querySelector(&apos;.main input&apos;).addEventListener(&apos;input&apos;, function()&#123;</span><br><span class="line">  console.log(this.value);</span><br><span class="line">  window.frames[0].document.querySelector(&apos;input&apos;).value = this.value;</span><br><span class="line">&#125;)</span><br><span class="line">document.domain = &quot;jrg.com&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">页面b</span><br><span class="line"></span><br><span class="line">document.domain = &apos;jrg.com&apos;;   //把两个页面的domain设置成一样即可</span><br></pre></td></tr></table></figure>
+<p><img src="降域.png" alt="降域.png"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/myblog/tags/跨域/" rel="tag"># 跨域</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myblog/2018/04/21/ajax/" rel="next" title="ajax">
+                <i class="fa fa-chevron-left"></i> ajax
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myblog/2018/04/21/jQuery/" rel="prev" title="jQuery">
+                jQuery <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/myblog/images/author.jpg" alt="Leojune">
+          <p class="site-author-name" itemprop="name">Leojune</p>
+           
+              <p class="site-description motion-element" itemprop="description">别停下来一停下来就停不下来</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/myblog/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/myblog/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/myblog/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/LeoJune" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2843805440?profile_ftype=1&is_all=1#_0" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="javascript:void(0)" target="_blank" title="593682855@qq.com">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                  593682855@qq.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-什么是同源策略"><span class="nav-number">1.</span> <span class="nav-text">1.什么是同源策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-什么是跨域？跨域有几种实现形式"><span class="nav-number">2.</span> <span class="nav-text">2.什么是跨域？跨域有几种实现形式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-JSONP"><span class="nav-number">3.</span> <span class="nav-text">3.JSONP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-CORS"><span class="nav-number">4.</span> <span class="nav-text">4.CORS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-postMessage"><span class="nav-number">5.</span> <span class="nav-text">5.postMessage</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-降域"><span class="nav-number">6.</span> <span class="nav-text">6.降域</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leojune</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/myblog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/myblog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/myblog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

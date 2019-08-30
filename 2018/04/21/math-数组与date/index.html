@@ -1,0 +1,768 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myblog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/myblog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="前端、博客">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/myblog/images/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="math1.写一个函数，返回从min到max之间的 随机整数，包括min不包括max1234function returnInt(min,max)&amp;#123; return Math.floor(Math.random()*(max - min) + min);&amp;#125;returnInt(2,4)  // 2或3 2.写一个函数，返回从min到max之间的 随机整数，包括min包括max123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="math,数组与date">
+<meta property="og:url" content="http://yoursite.com/myblog/2018/04/21/math-数组与date/index.html">
+<meta property="og:site_name" content="今天风儿有些喧嚣">
+<meta property="og:description" content="math1.写一个函数，返回从min到max之间的 随机整数，包括min不包括max1234function returnInt(min,max)&amp;#123; return Math.floor(Math.random()*(max - min) + min);&amp;#125;returnInt(2,4)  // 2或3 2.写一个函数，返回从min到max之间的 随机整数，包括min包括max123">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-21T10:09:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="math,数组与date">
+<meta name="twitter:description" content="math1.写一个函数，返回从min到max之间的 随机整数，包括min不包括max1234function returnInt(min,max)&amp;#123; return Math.floor(Math.random()*(max - min) + min);&amp;#125;returnInt(2,4)  // 2或3 2.写一个函数，返回从min到max之间的 随机整数，包括min包括max123">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/myblog/2018/04/21/math-数组与date/">
+
+
+
+
+
+  <title> math,数组与date | 今天风儿有些喧嚣 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">今天风儿有些喧嚣</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myblog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myblog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myblog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/myblog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/myblog/myblog/2018/04/21/math-数组与date/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leojune">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/myblog/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="今天风儿有些喧嚣">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                math,数组与date
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T17:45:56+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myblog/categories/base/" itemprop="url" rel="index">
+                    <span itemprop="name">base</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myblog/categories/base/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="math"><a href="#math" class="headerlink" title="math"></a>math</h1><h1 id="1-写一个函数，返回从min到max之间的-随机整数，包括min不包括max"><a href="#1-写一个函数，返回从min到max之间的-随机整数，包括min不包括max" class="headerlink" title="1.写一个函数，返回从min到max之间的 随机整数，包括min不包括max"></a>1.写一个函数，返回从min到max之间的 随机整数，包括min不包括max</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function returnInt(min,max)&#123;</span><br><span class="line"> return Math.floor(Math.random()*(max - min) + min);</span><br><span class="line">&#125;</span><br><span class="line">returnInt(2,4)  // 2或3</span><br></pre></td></tr></table></figure>
+<h1 id="2-写一个函数，返回从min到max之间的-随机整数，包括min包括max"><a href="#2-写一个函数，返回从min到max之间的-随机整数，包括min包括max" class="headerlink" title="2.写一个函数，返回从min到max之间的 随机整数，包括min包括max"></a>2.写一个函数，返回从min到max之间的 随机整数，包括min包括max</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function returnInt(min,max)&#123;</span><br><span class="line"> return Math.floor(Math.random()*(max - min + 1) + min);</span><br><span class="line">&#125;</span><br><span class="line">returnInt(2,4)  // 2或3或4</span><br></pre></td></tr></table></figure>
+<h1 id="3-写一个函数，生成一个长度为-n-的随机字符串，字符串字符的取值范围包括0到9，a到-z，A到Z"><a href="#3-写一个函数，生成一个长度为-n-的随机字符串，字符串字符的取值范围包括0到9，a到-z，A到Z" class="headerlink" title="3.写一个函数，生成一个长度为 n 的随机字符串，字符串字符的取值范围包括0到9，a到 z，A到Z"></a>3.写一个函数，生成一个长度为 n 的随机字符串，字符串字符的取值范围包括0到9，a到 z，A到Z</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function randStr(n)&#123;</span><br><span class="line">  var str = &quot;&quot;;</span><br><span class="line">  for(var i=0; i &lt; n; i++ )&#123;</span><br><span class="line">    var newLetter = getLetter();</span><br><span class="line">    str = str + newLetter;</span><br><span class="line">  &#125;</span><br><span class="line">return str;</span><br><span class="line">&#125;</span><br><span class="line">function getLetter()&#123;</span><br><span class="line">  var str = &quot;0123456789\</span><br><span class="line">abcdefghijklmnopqrstuvwxyz\</span><br><span class="line">ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;</span><br><span class="line"> return str[Math.floor(Math.random()*str.length)]</span><br><span class="line"> &#125;</span><br><span class="line">randStr(5)  // DPyNi</span><br></pre></td></tr></table></figure>
+<h1 id="4-写一个函数，生成一个随机-IP-地址，一个合法的-IP-地址为-0-0-0-0-255-255-255-255"><a href="#4-写一个函数，生成一个随机-IP-地址，一个合法的-IP-地址为-0-0-0-0-255-255-255-255" class="headerlink" title="4.写一个函数，生成一个随机 IP 地址，一个合法的 IP 地址为 0.0.0.0~255.255.255.255"></a>4.写一个函数，生成一个随机 IP 地址，一个合法的 IP 地址为 0.0.0.0~255.255.255.255</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function getRandIP()&#123;</span><br><span class="line">  var arr = [];</span><br><span class="line">  for(var i=0; i &lt; 4; i++ )&#123;</span><br><span class="line">    arr.push(getInt(0,256));</span><br><span class="line">  &#125;</span><br><span class="line">  return arr.join(&quot;.&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function getInt(min,max)&#123;</span><br><span class="line">  return Math.floor(Math.random()*(max-min) + min);</span><br><span class="line">&#125;</span><br><span class="line">getRandIP();  //</span><br></pre></td></tr></table></figure>
+<h1 id="5-写一个函数，生成一个随机颜色字符串，合法的颜色为-000000-ffffff"><a href="#5-写一个函数，生成一个随机颜色字符串，合法的颜色为-000000-ffffff" class="headerlink" title="5.写一个函数，生成一个随机颜色字符串，合法的颜色为#000000~ #ffffff"></a>5.写一个函数，生成一个随机颜色字符串，合法的颜色为#000000~ #ffffff</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getRandColor()&#123;</span><br><span class="line">  var arr = [&quot;#&quot;];</span><br><span class="line">  for(var i = 1;i &lt; 7; i++)&#123;</span><br><span class="line">    arr.push(getLetter());</span><br><span class="line">  &#125;</span><br><span class="line">  return arr.join(&quot;&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function getLetter()&#123;</span><br><span class="line">  var str = &quot;0123456789abcdef&quot;;</span><br><span class="line">  return str[Math.floor(Math.random()*str.length)];</span><br><span class="line">&#125;</span><br><span class="line">var color = getRandColor();</span><br><span class="line">console.log(color);        //#867e0e</span><br></pre></td></tr></table></figure>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h1 id="1-数组方法里push、pop、shift、unshift、join、splice分别是什么作用？用-splice函数分别实现push、pop、shift、unshift方法"><a href="#1-数组方法里push、pop、shift、unshift、join、splice分别是什么作用？用-splice函数分别实现push、pop、shift、unshift方法" class="headerlink" title="1.数组方法里push、pop、shift、unshift、join、splice分别是什么作用？用 splice函数分别实现push、pop、shift、unshift方法"></a>1.数组方法里push、pop、shift、unshift、join、splice分别是什么作用？用 splice函数分别实现push、pop、shift、unshift方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;];</span><br><span class="line">//push方法将一个或多个元素添加到数组的末尾，并返回数组的新长度</span><br><span class="line">var value1 = arr.push(&quot;d&quot;)                   arr = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span><br><span class="line">var value2 = arr.push(&quot;e&quot;,&quot;f&quot;)               arr = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;]</span><br><span class="line">console.log(value1)  //  4</span><br><span class="line">console.log(value2)  //  6</span><br><span class="line"></span><br><span class="line">//pop从数组中删除最后一个元素，并返回该元素的值。此方法更改数组的长度</span><br><span class="line">var value3 = arr.pop()                         </span><br><span class="line">console.log(value3)  //  f    arr = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;]</span><br><span class="line"></span><br><span class="line">//shift方法从数组中删除第一个元素，并返回该元素的值。此方法更改数组的长度</span><br><span class="line">var value4 = arr.shift()</span><br><span class="line">console.log(value4)  // a    arr = [&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;]</span><br><span class="line"></span><br><span class="line">//unshift方法将一个或多个元素添加到数组的开头，并返回新数组的长度</span><br><span class="line">var value5 = arr.unshift(&quot;g&quot;,&quot;h&quot;)              arr = [&quot;g&quot;,&quot;h&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;]</span><br><span class="line">console.log(value5)  //   6</span><br><span class="line"></span><br><span class="line">push与unshift对应 ，pop与shift对应（ps：竟然不是shift与unshift对应。。。）</span><br><span class="line"></span><br><span class="line">//join方法方法将数组（或一个[类数组对象]）的所有元素连接到一个字符串中  此方法并不改变原数组</span><br><span class="line">var str = arr.join()                             无参数则默认为&quot;,&quot;</span><br><span class="line">console.log(str)         //   g,h,b,c,d,e</span><br><span class="line">var str2 = arr.join(&quot;&quot;)  </span><br><span class="line">console.log(str2)   //  ghbcde</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">splice法通过删除现有元素和/或添加新元素来更改一个数组的内容,返回由被删除的元素组成的一个数组</span><br><span class="line">，如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</span><br><span class="line">语法  arr.splice(start,deletement,item1,item2)</span><br><span class="line">start:开始的位置  (这个开始的位置有点特别，如果不删只添加的话，开始的位置就是添加的第一个成员</span><br><span class="line">      在改变过的数组中的位置)</span><br><span class="line">deletement：要删除的个数</span><br><span class="line">item1，item2 要添加的成员</span><br><span class="line"></span><br><span class="line">var arr = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;];</span><br><span class="line">var arr2 = arr.splice(1,2)</span><br><span class="line">console.log(arr2)   //  [&quot;b&quot;,&quot;c&quot;]</span><br><span class="line"></span><br><span class="line"># splice实现arr.push(&quot;d&quot;,&quot;e&quot;)</span><br><span class="line">arr.splice(arr.length,0,&quot;d&quot;,&quot;e&quot;) </span><br><span class="line">console.log(arr)    // [&quot;a&quot;,&quot;d&quot;,&quot;e&quot;]</span><br><span class="line"></span><br><span class="line"># splice实现 arr.pop()</span><br><span class="line">arr.splice(arr.length-1,1)</span><br><span class="line">console.log(arr)   //   [&quot;a&quot;,&quot;d&quot;]</span><br><span class="line"></span><br><span class="line">#splice实现arr.shift()</span><br><span class="line">arr.splice(0,1)</span><br><span class="line">console.log(arr)  //  [&quot;d&quot;]</span><br><span class="line"></span><br><span class="line">#splice实现arr.unshift(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;)</span><br><span class="line">arr.splice(0,0,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;)</span><br><span class="line">console.log(arr)   //  [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span><br></pre></td></tr></table></figure>
+<h1 id="2-写一个函数，操作数组，数组中的每一项变为原来的平方，在原数组上操作"><a href="#2-写一个函数，操作数组，数组中的每一项变为原来的平方，在原数组上操作" class="headerlink" title="2.写一个函数，操作数组，数组中的每一项变为原来的平方，在原数组上操作"></a>2.写一个函数，操作数组，数组中的每一项变为原来的平方，在原数组上操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function squareArr(arr)&#123;</span><br><span class="line">  for(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">    arr[i] = arr[i]*arr[i]</span><br><span class="line">  &#125;</span><br><span class="line">  return arr;</span><br><span class="line">&#125;</span><br><span class="line">var arr = [2, 4, 6]</span><br><span class="line">squareArr(arr)</span><br><span class="line">console.log(arr)   //[4, 16, 36]</span><br></pre></td></tr></table></figure>
+<h1 id="3-写一个函数，操作数组，返回一个新数组，新数组中只包含正数，原数组不变"><a href="#3-写一个函数，操作数组，返回一个新数组，新数组中只包含正数，原数组不变" class="headerlink" title="3.写一个函数，操作数组，返回一个新数组，新数组中只包含正数，原数组不变"></a>3.写一个函数，操作数组，返回一个新数组，新数组中只包含正数，原数组不变</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function filterPositive(arr)&#123;</span><br><span class="line">  var newArr = [];</span><br><span class="line">  for(var i = 0; i&lt; arr.length; i++ )&#123;</span><br><span class="line">    if(typeof arr[i] === &quot;number&quot; &amp;&amp; arr[i] &gt; 0)&#123;</span><br><span class="line">      newArr.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return newArr;</span><br><span class="line">&#125;</span><br><span class="line">var arr = [3, -1,  2,  &apos;leojune&apos;, true]</span><br><span class="line">var newArr = filterPositive(arr)</span><br><span class="line">console.log(newArr)   // [3,2]</span><br><span class="line">console.log(arr)      //  [3, -1,  2,  &apos;leojune&apos;, true]</span><br></pre></td></tr></table></figure>
+<h1 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h1><h1 id="1-写一个函数getChIntv，获取从当前时间到指定日期的间隔时间"><a href="#1-写一个函数getChIntv，获取从当前时间到指定日期的间隔时间" class="headerlink" title="1. 写一个函数getChIntv，获取从当前时间到指定日期的间隔时间"></a>1. 写一个函数getChIntv，获取从当前时间到指定日期的间隔时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var str = getChIntv(&quot;2018-02-15&quot;);   </span><br><span class="line">console.log(str);   //距除夕还有 20 天 15 小时 20 分 10 秒</span><br><span class="line"></span><br><span class="line">function getChIntv(datestr)&#123;</span><br><span class="line">  var myDateStr = datestr. split(&quot;-&quot;).join(&quot;/&quot;);    //Safari 不支持&quot;-&quot;的写法</span><br><span class="line">  var targetDate = new Date(myDateStr);</span><br><span class="line">  var nowDate = new Date;</span><br><span class="line">  var timeDis =Math.abs(targetDate.getTime() - nowDate.getTime());</span><br><span class="line">  var totalSecond = Math.floor(timeDis/1000);</span><br><span class="line">  var seconds = totalSecond%60;</span><br><span class="line">  var totalMinute = Math.floor(totalSecond/(60));</span><br><span class="line">  var minutes = totalMinute%60;</span><br><span class="line">  var totalHours = Math.floor(totalSecond/(60*60));</span><br><span class="line">  var hours = totalHours%24;</span><br><span class="line">  var days = Math.floor(totalSecond/(60*60*24));</span><br><span class="line">  if(targetDate.getTime() - nowDate.getTime() &gt; 0)&#123;</span><br><span class="line">    return &quot;距离&quot; + datestr +&quot;还有&quot; + days + &quot;天&quot; + hours + &quot;小时&quot; +minutes + &quot;分钟&quot; + seconds + &quot;秒&quot;</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    return &quot;距离&quot; + datestr +&quot;已过去&quot; + days + &quot;天&quot; + hours + &quot;小时&quot; +minutes + &quot;分钟&quot; + seconds + &quot;秒&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-把hh-mm-dd格式数字日期改成中文日期"><a href="#2-把hh-mm-dd格式数字日期改成中文日期" class="headerlink" title="2.把hh-mm-dd格式数字日期改成中文日期"></a>2.把hh-mm-dd格式数字日期改成中文日期</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var str = getChsDate(&apos;2015-01-08&apos;);</span><br><span class="line">console.log(str);   // 二零一五年一月八日</span><br><span class="line"></span><br><span class="line">function getChsDate(datestr)&#123;</span><br><span class="line">  var arr = datestr.split(&quot;-&quot;);</span><br><span class="line">  var dic = [&quot;零&quot;,&quot;一&quot;,&quot;二&quot;,&quot;三&quot;,&quot;四&quot;,&quot;五&quot;,&quot;六&quot;,&quot;七&quot;,&quot;八&quot;,&quot;九&quot;,&quot;十&quot;,&quot;十一&quot;,&quot;十二&quot;,&quot;十三&quot;,&quot;十四&quot;,&quot;十五&quot;,&quot;十六&quot;,&quot;十七&quot;,&quot;十八&quot;,&quot;十九&quot;,&quot;二十&quot;,&quot;二十一&quot;,&quot;二十二&quot;,&quot;二十三&quot;,&quot;二十四&quot;,&quot;二十五&quot;,&quot;二十六&quot;,&quot;二十七&quot;,&quot;二十八&quot;,&quot;二十九&quot;,&quot;三十&quot;,&quot;三十一&quot;]</span><br><span class="line">  var year = &quot;&quot;;</span><br><span class="line">  var month = &quot;&quot;;</span><br><span class="line">  var day = &quot;&quot;; </span><br><span class="line">  for(var i = 0; i &lt; arr[0].length; i++)&#123;</span><br><span class="line">     year = year + dic[arr[0][i]];</span><br><span class="line">  &#125;</span><br><span class="line">  month = dic[parseInt(arr[1])];</span><br><span class="line">  day = dic[parseInt(arr[2])];</span><br><span class="line">  return year + &quot;年&quot; +month +&quot;月&quot; + day +&quot;日&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-写一个函数，参数为时间对象毫秒数的字符串格式，返回值为字符串。假设参数为时间对象毫秒数t，根据t的时间分别返回如下字符串"><a href="#3-写一个函数，参数为时间对象毫秒数的字符串格式，返回值为字符串。假设参数为时间对象毫秒数t，根据t的时间分别返回如下字符串" class="headerlink" title="3.写一个函数，参数为时间对象毫秒数的字符串格式，返回值为字符串。假设参数为时间对象毫秒数t，根据t的时间分别返回如下字符串:"></a>3.写一个函数，参数为时间对象毫秒数的字符串格式，返回值为字符串。假设参数为时间对象毫秒数t，根据t的时间分别返回如下字符串:</h1><ul>
+<li>刚刚（ t 距当前时间不到1分钟时间间隔）</li>
+<li>3分钟前 (t距当前时间大于等于1分钟，小于1小时)</li>
+<li>8小时前 (t 距离当前时间大于等于1小时，小于24小时)</li>
+<li>3天前 (t 距离当前时间大于等于24小时，小于30天)</li>
+<li>2个月前 (t 距离当前时间大于等于30天小于12个月)</li>
+<li>8年前 (t 距离当前时间大于等于12个月)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function getDis(t)&#123;</span><br><span class="line">  var disTime = new Date().getTime() - t;</span><br><span class="line">  var m = 60*1000;</span><br><span class="line">  var h = 60*m;</span><br><span class="line">  var d = 24*h;</span><br><span class="line">  var mon = 30*d;</span><br><span class="line">  var y = 12*mon; </span><br><span class="line">  if( disTime &gt; 0 &amp;&amp; disTime &lt; m)&#123;</span><br><span class="line">    return &quot;刚刚&quot;</span><br><span class="line">  &#125;else if( disTime &gt;=m &amp;&amp; disTime &lt; h)&#123;</span><br><span class="line">    return &quot;3分钟前&quot;</span><br><span class="line">  &#125;else if( disTime &gt;=h &amp;&amp; disTime &lt; d)&#123;</span><br><span class="line">    return &quot;8小时前&quot;</span><br><span class="line">  &#125;else if( disTime &gt;=d &amp;&amp; disTime &lt; mon)&#123;</span><br><span class="line">    return &quot;3天前&quot;</span><br><span class="line">  &#125;else if( disTime &gt;=mon &amp;&amp; disTime &lt; y)&#123;</span><br><span class="line">    return &quot;2个月前&quot;</span><br><span class="line">  &#125;else if( disTime &gt;=y )&#123;</span><br><span class="line">    return &quot;8年前&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var time1 = getDis(1496505600000);          </span><br><span class="line">// new Date(&quot;2017/06/04&quot;).getTime() = 1496505600000</span><br><span class="line">console.log(time1);   // 2个月前</span><br><span class="line">var time2 = getDis(1462291200000);</span><br><span class="line">// new Date(&quot;2016/05/04&quot;).getTime() = 1462291200000</span><br><span class="line">console.log(time2);  // 8年前</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myblog/2018/04/21/字符串与JSON/" rel="next" title="字符串与JSON">
+                <i class="fa fa-chevron-left"></i> 字符串与JSON
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myblog/2018/04/21/正则表达式/" rel="prev" title="正则表达式">
+                正则表达式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/myblog/images/author.jpg" alt="Leojune">
+          <p class="site-author-name" itemprop="name">Leojune</p>
+           
+              <p class="site-description motion-element" itemprop="description">别停下来一停下来就停不下来</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/myblog/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/myblog/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/myblog/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/LeoJune" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2843805440?profile_ftype=1&is_all=1#_0" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="javascript:void(0)" target="_blank" title="593682855@qq.com">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                  593682855@qq.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#math"><span class="nav-number">1.</span> <span class="nav-text">math</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-写一个函数，返回从min到max之间的-随机整数，包括min不包括max"><span class="nav-number">2.</span> <span class="nav-text">1.写一个函数，返回从min到max之间的 随机整数，包括min不包括max</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-写一个函数，返回从min到max之间的-随机整数，包括min包括max"><span class="nav-number">3.</span> <span class="nav-text">2.写一个函数，返回从min到max之间的 随机整数，包括min包括max</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-写一个函数，生成一个长度为-n-的随机字符串，字符串字符的取值范围包括0到9，a到-z，A到Z"><span class="nav-number">4.</span> <span class="nav-text">3.写一个函数，生成一个长度为 n 的随机字符串，字符串字符的取值范围包括0到9，a到 z，A到Z</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-写一个函数，生成一个随机-IP-地址，一个合法的-IP-地址为-0-0-0-0-255-255-255-255"><span class="nav-number">5.</span> <span class="nav-text">4.写一个函数，生成一个随机 IP 地址，一个合法的 IP 地址为 0.0.0.0~255.255.255.255</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-写一个函数，生成一个随机颜色字符串，合法的颜色为-000000-ffffff"><span class="nav-number">6.</span> <span class="nav-text">5.写一个函数，生成一个随机颜色字符串，合法的颜色为#000000~ #ffffff</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">7.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-数组方法里push、pop、shift、unshift、join、splice分别是什么作用？用-splice函数分别实现push、pop、shift、unshift方法"><span class="nav-number">8.</span> <span class="nav-text">1.数组方法里push、pop、shift、unshift、join、splice分别是什么作用？用 splice函数分别实现push、pop、shift、unshift方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-写一个函数，操作数组，数组中的每一项变为原来的平方，在原数组上操作"><span class="nav-number">9.</span> <span class="nav-text">2.写一个函数，操作数组，数组中的每一项变为原来的平方，在原数组上操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-写一个函数，操作数组，返回一个新数组，新数组中只包含正数，原数组不变"><span class="nav-number">10.</span> <span class="nav-text">3.写一个函数，操作数组，返回一个新数组，新数组中只包含正数，原数组不变</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date"><span class="nav-number">11.</span> <span class="nav-text">Date</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-写一个函数getChIntv，获取从当前时间到指定日期的间隔时间"><span class="nav-number">12.</span> <span class="nav-text">1. 写一个函数getChIntv，获取从当前时间到指定日期的间隔时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-把hh-mm-dd格式数字日期改成中文日期"><span class="nav-number">13.</span> <span class="nav-text">2.把hh-mm-dd格式数字日期改成中文日期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-写一个函数，参数为时间对象毫秒数的字符串格式，返回值为字符串。假设参数为时间对象毫秒数t，根据t的时间分别返回如下字符串"><span class="nav-number">14.</span> <span class="nav-text">3.写一个函数，参数为时间对象毫秒数的字符串格式，返回值为字符串。假设参数为时间对象毫秒数t，根据t的时间分别返回如下字符串:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leojune</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myblog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/myblog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/myblog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/myblog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myblog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
